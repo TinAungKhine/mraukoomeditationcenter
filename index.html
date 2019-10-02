@@ -42,8 +42,8 @@
 
 	<script>
 		$(document).ready(function() {
-			var s3 = 'https://tinaungkhine.github.io/mraukoomeditationcenter/index.html?url=http://mraukoomeditationcenter.s3-website-ap-southeast-1.amazonaws.com';
-			var url = s3 + '/all-albums.json';
+			var s3 = 'http://mraukoomeditationcenter.s3-website-ap-southeast-1.amazonaws.com';
+			var url = './all-albums.json';
 			$.get(url, function(albums) {
 				$('.pager').pagination({
 					dataSource: albums,
