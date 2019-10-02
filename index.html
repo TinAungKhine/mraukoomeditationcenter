@@ -59,7 +59,7 @@
 							card.append('<div class="card-header"><h5>'+ albums[i].title +'</h5></div>');
 							var audio = $('<ul class="list-group list-group-flush">');
 							for(var j = 0; j < albums[i].audios.length; j++) {
-								audio.append('<li class="list-group-item"><p>'+albums[i].audios[j].title+'</p><audio controls><source type="audio/mpeg" src="'s3+albums[i].audios[i].location+'"></audio></li>');
+								audio.append('<li class="list-group-item"><p>'+albums[i].audios[j].title+'</p><audio controls><source type="audio/mpeg" src="'+s3+albums[i].audios[i].location+'"></audio></li>');
 							}
 							card.append(audio);
 							$(".content").append(card);
