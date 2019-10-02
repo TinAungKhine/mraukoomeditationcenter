@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Mrauk Oo Meditation Center: You can listen Dhamma Audio, read Facebook News, learn what it is about and get contact information for donation.">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118871741-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-118871741-4');
+	</script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<title>Mrauk Oo Meditation Center</title>
+	<style>
+		li.active a {
+			color: #fff !important;
+			background-color: #343a40 !important;
+			border-color: #343a40 !important;
+		}
+	</style>
+  </head>
+  <body>
+	
+	<nav class="pager d-flex justify-content-center mt-5"></nav>
+	
+	<div class="content d-flex flex-wrap justify-content-around align-self-start mx-2 my-4"></div>
+	
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="./pagination.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			var s3 = 'http://mraukoomeditationcenter.s3-website-ap-southeast-1.amazonaws.com';
+			var url = s3 + '/all-albums.json';
+			$.get(url, function(albums) {
+				$('.pager').pagination({
+					dataSource: albums,
+					pageSize: 3,    				
+					ulClassName: "pagination",
+					callback: function(albums, pagination) {
+						$('li').addClass('page-item');					
+						$('li a').addClass('page-link');
+						$('li a').addClass('text-dark');
+						$(".content").html("");
+						for(var i = 0; i < albums.length; i++) {
+							var card = $('<div class="card mb-4" style="width: 24rem;">');
+							card.append('<div class="card-header"><h5>'+ albums[i].title +'</h5></div>');
+							var audio = $('<ul class="list-group list-group-flush">');
+							for(var j = 0; j < albums[i].audios.length; j++) {
+								audio.append('<li class="list-group-item"><p>'+albums[i].audios[j].title+'</p><audio controls><source type="audio/mpeg" src="'s3+albums[i].audios[i].location+'"></audio></li>');
+							}
+							card.append(audio);
+							$(".content").append(card);
+						}
+					}
+				});
+			});
+		});
+	</script>
+  </body>
+</html>
