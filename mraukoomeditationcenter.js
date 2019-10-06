@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var url = './all-playlist.json';
 	$.get(url, function(playlistIds) {
+		console.log(playlistIds);
 		$('.pager').pagination({
 			dataSource: playlistIds,
 			pageSize: 6,    				
