@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var s3 = 'https://mraukoomeditationcenter.s3-website-ap-southeast-1.amazonaws.com';
+	var s3 = 'https://mraukoomeditationcenter.s3-ap-southeast-1.amazonaws.com';
 	var url = './all-albums.json';
 	$.get(url, function(albums) {
 		$('.pager').pagination({
