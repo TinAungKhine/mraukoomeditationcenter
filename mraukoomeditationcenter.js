@@ -1,20 +1,24 @@
 $(document).ready(function() {
-	var url = './all-playlist.json';
-	$.get(url, function(playlistIds) {
-		console.log(playlistIds);
+	var s3 = 'https://mraukoomeditationcenter.s3-website-ap-southeast-1.amazonaws.com';
+	var url = './all-albums.json';
+	$.get(url, function(albums) {
 		$('.pager').pagination({
-			dataSource: playlistIds,
+			dataSource: albums,
 			pageSize: 6,    				
 			ulClassName: "pagination",
-			callback: function(playlistIds, pagination) {
+			callback: function(albums, pagination) {
 				$('li').addClass('page-item');					
 				$('li a').addClass('page-link');
 				$('li a').addClass('text-dark');
 				$(".content").html("");
-				for(var i = 0; i < playlistIds.length; i++) {
+				for(var i = 0; i < albums.length; i++) {
 					var card = $('<div class="card mb-4" style="width: 24rem;">');
-					var embeddedPlayer = '<iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/'+playlistIds[i]+'&color=%23404854&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true"></iframe>';
-					card.append(embeddedPlayer);
+					card.append('<div class="card-header"><h5>'+ albums[i].title +'</h5></div>');
+					var audio = $('<ul class="list-group list-group-flush">');
+					for(var j = 0; j < albums[i].audios.length; j++) {
+						audio.append('<li class="list-group-item"><p>'+albums[i].audios[j].title+'</p><audio controls><source type="audio/mpeg" src="'+s3+albums[i].audios[i].location+'"></audio></li>');
+					}
+					card.append(audio);
 					$(".content").append(card);
 				}
 			}
