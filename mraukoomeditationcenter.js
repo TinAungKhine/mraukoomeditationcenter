@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$.get(url, function(albums) {
 		$('.pager').pagination({
 			dataSource: albums,
-			pageSize: 6,    				
+			pageSize: 4,    				
 			ulClassName: "pagination",
 			callback: function(albums, pagination) {
 				$('li').addClass('page-item');					
